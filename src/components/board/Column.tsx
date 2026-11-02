@@ -15,12 +15,12 @@ export function Column({ status, tasks, pending }: { status: TaskStatus; tasks: 
       ref={setNodeRef}
       data-testid={`column-${status}`}
       aria-label={`${TITLES[status]} 컬럼`}
-      className={`flex min-h-64 flex-col rounded-lg border p-3 ${
-        isOver ? "border-sky-400 bg-sky-50" : "border-slate-200 bg-slate-100"
+      className={`flex min-h-64 flex-col rounded-md border-2 p-3 transition-colors ${
+        isOver ? "border-ink bg-surface-strong" : "border-transparent bg-surface-soft"
       }`}
     >
-      <h2 className="mb-3 flex items-center justify-between text-sm font-semibold text-slate-700">
-        {TITLES[status]} <span className="text-xs text-slate-500">{tasks.length}</span>
+      <h2 className="mb-3 flex items-center justify-between px-1 text-base font-semibold text-ink">
+        {TITLES[status]} <span className="chip">{tasks.length}</span>
       </h2>
       <SortableContext items={tasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>
         <ul className="flex flex-1 flex-col gap-2">
@@ -46,14 +46,14 @@ function TaskCard({ task, disabled }: { task: TaskDTO; disabled: boolean }) {
       data-task-id={task.id}
       aria-busy={disabled}
       style={{ transform: CSS.Translate.toString(transform), transition }}
-      className={`touch-manipulation select-none rounded-md border border-slate-200 bg-white p-3 shadow-sm [-webkit-touch-callout:none] ${
-        isDragging ? "z-10 opacity-70 shadow-lg" : ""
+      className={`touch-manipulation select-none rounded-md border border-hairline bg-canvas p-4 transition-shadow hover:shadow-float [-webkit-touch-callout:none] ${
+        isDragging ? "z-10 opacity-80 shadow-float" : ""
       } ${disabled ? "cursor-wait opacity-60" : "cursor-grab"}`}
       {...attributes}
       {...listeners}
     >
-      <p className="text-sm font-medium">{task.title}</p>
-      <p className="mt-1 text-xs text-slate-500">{task.date}</p>
+      <p className="text-base font-semibold text-ink">{task.title}</p>
+      <p className="mt-1 text-sm text-muted">{task.date}</p>
     </li>
   );
 }

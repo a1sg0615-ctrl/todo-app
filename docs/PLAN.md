@@ -22,6 +22,7 @@
 | 입력 검증 | Zod | API 경계에서 요청 본문 검증 |
 | 드래그 앤 드롭 | @dnd-kit/core (+ @dnd-kit/sortable, P1) | React 18/19 지원, 유지보수 중, 컬럼 간 이동과 컬럼 내 정렬 모두 지원 |
 | 스타일 | Tailwind CSS | create-next-app 기본 옵션 |
+| 디자인 | `src/app/globals.css`의 `@theme` 토큰 | 흰 바탕 + 잉크(#222222) 글자 + 강조색 하나(primary #ff385c)를 아껴 쓰는 사진 중심 마켓플레이스 스타일 가이드를 적용. 둥근 모서리(8/14/32px, 알약), 그림자는 `shadow-float` 한 단계만, 다크 모드 없음. 서체는 전용 서체 대신 권장 대체 서체 Inter + 시스템 한글 서체, 한국어는 `word-break: keep-all`. 공통 클래스: `.btn`, `.btn-primary`, `.btn-text`, `.input`, `.card`, `.chip`, `.page-title` |
 | 테스트 | Vitest + mongodb-memory-server (단위/통합), Playwright (E2E) | 실제 MongoDB 없이 서비스 로직 테스트 가능 |
 
 **범위에서 제외**: 로그인/인증, 다중 사용자 (PRD 타깃이 "개인 사용자"이므로 단일 사용자로 가정)

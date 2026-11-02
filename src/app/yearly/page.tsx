@@ -57,10 +57,10 @@ export default function YearlyPage() {
   }
 
   return (
-    <div className="space-y-4">
-      <h1 className="text-xl font-semibold">1년 목표</h1>
+    <div className="space-y-6">
+      <h1 className="page-title">1년 목표</h1>
 
-      <form onSubmit={create} className="card flex flex-wrap items-center gap-2">
+      <form onSubmit={create} className="card flex flex-wrap items-center gap-3">
         <input
           className="input flex-1"
           placeholder="1년 목표 제목"
@@ -81,8 +81,8 @@ export default function YearlyPage() {
         <MemoInput value={memo} onChange={setMemo} label="새 1년 목표 메모" />
       </form>
 
-      <ul className="space-y-2" aria-label="1년 목표 목록">
-        {goals.length === 0 && <li className="text-sm text-slate-500">1년 목표가 없습니다.</li>}
+      <ul className="space-y-3" aria-label="1년 목표 목록">
+        {goals.length === 0 && <li className="text-sm text-muted">1년 목표가 없습니다.</li>}
         {goals.map((goal) => (
           <GoalRow
             key={goal.id}
@@ -152,11 +152,11 @@ function GoalRow({
         </form>
       ) : (
         <div className="flex flex-wrap items-center gap-3">
-          <span className="rounded bg-slate-100 px-2 py-0.5 text-xs tabular-nums">{goal.year}</span>
-          <span className="font-medium">{goal.title}</span>
+          <span className="chip">{goal.year}</span>
+          <span className="text-base font-semibold">{goal.title}</span>
           <span className="ml-auto flex gap-2">
             <button
-              className="btn"
+              className="btn-text"
               onClick={() => {
                 setTitle(goal.title);
                 setYear(String(goal.year));
@@ -166,7 +166,7 @@ function GoalRow({
             >
               수정
             </button>
-            <button className="btn" onClick={onDelete}>
+            <button className="btn-text" onClick={onDelete}>
               삭제
             </button>
           </span>
@@ -175,15 +175,15 @@ function GoalRow({
       {!editing && <MemoText memo={goal.memo} />}
       <ProgressBar value={goal.progress} label={`${goal.title} 진행률`} />
       <div>
-        <p className="mb-1 text-xs font-medium text-slate-500">연결된 주간 계획 ({plans.length})</p>
+        <p className="mb-2 text-sm font-medium text-muted">연결된 주간 계획 ({plans.length})</p>
         <ul className="space-y-1 text-sm" aria-label={`${goal.title} 연결된 주간 계획`}>
-          {plans.length === 0 && <li className="text-slate-400">없음</li>}
+          {plans.length === 0 && <li className="text-muted-soft">없음</li>}
           {plans.map((p) => (
             <li key={p.id} className="flex justify-between gap-2">
               <span>
-                {p.title} <span className="tabular-nums text-slate-500">({p.startDate} ~ {p.endDate})</span>
+                {p.title} <span className="text-muted">({p.startDate} ~ {p.endDate})</span>
               </span>
-              <span className="tabular-nums text-slate-600">{p.progress}%</span>
+              <span className="text-muted">{p.progress}%</span>
             </li>
           ))}
         </ul>

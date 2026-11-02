@@ -23,8 +23,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             key={t.id}
             role={t.kind === "error" ? "alert" : "status"}
             data-testid="toast"
-            className={`rounded-md px-4 py-3 text-sm text-white shadow-lg ${
-              t.kind === "error" ? "bg-red-600" : "bg-slate-800"
+            className={`rounded-sm px-4 py-3 text-sm font-medium text-white shadow-float ${
+              t.kind === "error" ? "bg-error" : "bg-ink"
             }`}
           >
             {t.message}

@@ -140,24 +140,30 @@ export function Board() {
   );
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <button className="btn" onClick={() => setQuery({ week: addDays(week, -7) })}>
-          이전 주
-        </button>
-        <button className="btn" onClick={() => setQuery({ week: weekStart(today()) })}>
-          이번 주
-        </button>
-        <button className="btn" onClick={() => setQuery({ week: addDays(week, 7) })}>
-          다음 주
-        </button>
-        <span data-testid="week-range" className="ml-2 font-medium tabular-nums">
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+        <h1 data-testid="week-range" className="page-title">
           {planFilter && weekPlan
             ? `${weekPlan.startDate} ~ ${weekPlan.endDate}`
             : `${week} ~ ${addDays(week, 6)}`}
-        </span>
+        </h1>
 
-        <label className="ml-auto flex items-center gap-2 text-sm">
+        {/* 주 이동: 칸이 나뉜 알약 모양 버튼 묶음 */}
+        <div className="flex h-12 items-center rounded-full border border-hairline bg-canvas shadow-float">
+          <button className="h-full rounded-l-full px-4 text-sm font-medium hover:bg-surface-soft" onClick={() => setQuery({ week: addDays(week, -7) })}>
+            이전 주
+          </button>
+          <span className="h-6 w-px bg-hairline" />
+          <button className="h-full px-4 text-sm font-medium hover:bg-surface-soft" onClick={() => setQuery({ week: weekStart(today()) })}>
+            이번 주
+          </button>
+          <span className="h-6 w-px bg-hairline" />
+          <button className="h-full rounded-r-full px-4 text-sm font-medium hover:bg-surface-soft" onClick={() => setQuery({ week: addDays(week, 7) })}>
+            다음 주
+          </button>
+        </div>
+
+        <label className="flex items-center gap-2 text-sm font-medium text-muted sm:ml-auto">
           주간 계획 필터
           <select
             className="input"
@@ -179,10 +185,10 @@ export function Board() {
       </div>
 
       {weekPlan && (
-        <div className="card flex items-center gap-4 py-3">
-          <span className="text-sm text-slate-500">주간 계획</span>
-          <span className="font-medium">{weekPlan.title}</span>
-          <div className="flex-1">
+        <div className="card flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span className="text-sm text-muted">주간 계획</span>
+          <span className="text-base font-semibold">{weekPlan.title}</span>
+          <div className="min-w-48 flex-1">
             <ProgressBar value={weekPlan.progress} label={`${weekPlan.title} 진행률`} />
           </div>
         </div>

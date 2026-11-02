@@ -1,7 +1,7 @@
 export function MemoText({ memo }: { memo: string }) {
   if (!memo) return null;
   return (
-    <p data-testid="memo" className="whitespace-pre-wrap border-l-2 border-slate-200 pl-3 text-sm text-slate-600">
+    <p data-testid="memo" className="whitespace-pre-wrap border-l-2 border-hairline pl-3 text-sm text-muted">
       {memo}
     </p>
   );

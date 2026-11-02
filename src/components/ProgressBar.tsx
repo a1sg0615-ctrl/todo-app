@@ -7,11 +7,11 @@ export function ProgressBar({ value, label }: { value: number; label: string }) 
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={100}
-        className="h-2 flex-1 overflow-hidden rounded-full bg-slate-200"
+        className="h-2 flex-1 overflow-hidden rounded-full bg-surface-strong"
       >
-        <div className="h-full bg-emerald-500 transition-all" style={{ width: `${value}%` }} />
+        <div className="h-full bg-primary transition-all" style={{ width: `${value}%` }} />
       </div>
-      <span className="w-10 text-right text-sm tabular-nums text-slate-600">{value}%</span>
+      <span className="w-12 text-right text-sm font-semibold tabular-nums text-ink">{value}%</span>
     </div>
   );
 }

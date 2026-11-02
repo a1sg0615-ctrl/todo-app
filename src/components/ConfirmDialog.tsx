@@ -25,16 +25,16 @@ export function ConfirmProvider({ children }: { children: ReactNode }) {
     <ConfirmContext.Provider value={confirm}>
       {children}
       {message !== null && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40" onClick={() => close(false)}>
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50" onClick={() => close(false)}>
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="confirm-message"
-            className="w-80 rounded-lg bg-white p-5 shadow-xl"
+            className="w-[min(90vw,24rem)] rounded-md bg-canvas p-6 shadow-float"
             onClick={(e) => e.stopPropagation()}
             onKeyDown={(e) => e.key === "Escape" && close(false)}
           >
-            <p id="confirm-message" className="mb-4 text-sm text-slate-800">
+            <p id="confirm-message" className="mb-6 text-base text-ink">
               {message}
             </p>
             <div className="flex justify-end gap-2">

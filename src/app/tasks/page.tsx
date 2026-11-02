@@ -109,9 +109,9 @@ function TasksView() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
-      <section className="space-y-4">
+      <section className="space-y-6">
         <div className="flex items-center gap-3">
-          <h1 className="text-xl font-semibold">일일 할 일</h1>
+          <h1 className="page-title">일일 할 일</h1>
           <input
             type="date"
             className="input"
@@ -121,7 +121,7 @@ function TasksView() {
           />
         </div>
 
-        <form onSubmit={create} className="card flex flex-wrap items-center gap-2">
+        <form onSubmit={create} className="card flex flex-wrap items-center gap-3">
           <input
             className="input flex-1"
             placeholder="할 일 제목"
@@ -136,8 +136,8 @@ function TasksView() {
           <MemoInput value={memo} onChange={setMemo} label="새 할 일 메모" />
         </form>
 
-        <ul className="space-y-2" aria-label="할 일 목록">
-          {tasks.length === 0 && <li className="text-sm text-slate-500">이 날짜에 할 일이 없습니다.</li>}
+        <ul className="space-y-3" aria-label="할 일 목록">
+          {tasks.length === 0 && <li className="text-sm text-muted">이 날짜에 할 일이 없습니다.</li>}
           {tasks.map((task) => (
             <TaskRow key={task.id} task={task} plans={plans} onSaved={load} onDelete={() => remove(task)} />
           ))}
@@ -145,13 +145,13 @@ function TasksView() {
       </section>
 
       <aside className="space-y-3">
-        <h2 className="font-semibold">미연결 할 일</h2>
+        <h2 className="text-xl font-semibold">미연결 할 일</h2>
         <ul className="card space-y-1 text-sm" aria-label="미연결 할 일 목록">
-          {unlinked.length === 0 && <li className="text-slate-500">모든 할 일이 주간 계획에 연결되어 있습니다.</li>}
+          {unlinked.length === 0 && <li className="text-muted">모든 할 일이 주간 계획에 연결되어 있습니다.</li>}
           {unlinked.map((task) => (
             <li key={task.id} className="flex justify-between gap-2">
               <span>{task.title}</span>
-              <span className="tabular-nums text-slate-500">{task.date}</span>
+              <span className="text-muted">{task.date}</span>
             </li>
           ))}
         </ul>
@@ -247,12 +247,13 @@ function TaskRow({
 
   return (
     <li className="card space-y-2" data-testid="task-row">
-      <div className="flex items-center gap-3">
-        <span className="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-600">{STATUS_LABEL[task.status]}</span>
-        <span className="flex-1">{task.title}</span>
-        <span className="text-xs text-slate-500">{planTitle ?? "미연결"}</span>
+      {/* 좁은 화면에서는 제목 줄 아래로 계획 이름과 버튼이 내려간다. */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span className="chip">{STATUS_LABEL[task.status]}</span>
+        <span className="min-w-0 flex-1 basis-48 text-base font-semibold">{task.title}</span>
+        <span className="ml-auto text-sm text-muted">{planTitle ?? "미연결"}</span>
         <button
-          className="btn"
+          className="btn-text"
           onClick={() => {
             setDraft(task);
             setEditing(true);
@@ -260,7 +261,7 @@ function TaskRow({
         >
           수정
         </button>
-        <button className="btn" onClick={onDelete}>
+        <button className="btn-text" onClick={onDelete}>
           삭제
         </button>
       </div>

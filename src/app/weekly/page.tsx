@@ -90,10 +90,10 @@ export default function WeeklyPage() {
   }
 
   return (
-    <div className="space-y-4">
-      <h1 className="text-xl font-semibold">주간 계획</h1>
+    <div className="space-y-6">
+      <h1 className="page-title">주간 계획</h1>
 
-      <form onSubmit={create} className="card flex flex-wrap items-center gap-2">
+      <form onSubmit={create} className="card flex flex-wrap items-center gap-3">
         <input
           className="input flex-1"
           placeholder="주간 계획 제목"
@@ -110,9 +110,9 @@ export default function WeeklyPage() {
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
         />
-        <span className="text-sm tabular-nums text-slate-500">
+        <span className="text-sm text-muted">
           ~ {validStart ? addDays(startDate, 6) : "-"}
-          {validStart && !isMonday(startDate) && <span className="ml-2 text-red-600">월요일을 선택하세요</span>}
+          {validStart && !isMonday(startDate) && <span className="ml-2 text-error">월요일을 선택하세요</span>}
         </span>
         <GoalSelect goals={goals} value={goalId} onChange={setGoalId} label="새 주간 계획 1년 목표" />
         <button className="btn btn-primary" type="submit">
@@ -121,8 +121,8 @@ export default function WeeklyPage() {
         <MemoInput value={memo} onChange={setMemo} label="새 주간 계획 메모" />
       </form>
 
-      <ul className="space-y-2" aria-label="주간 계획 목록">
-        {plans.length === 0 && <li className="text-sm text-slate-500">주간 계획이 없습니다.</li>}
+      <ul className="space-y-3" aria-label="주간 계획 목록">
+        {plans.length === 0 && <li className="text-sm text-muted">주간 계획이 없습니다.</li>}
         {plans.map((plan) => (
           <PlanRow key={plan.id} plan={plan} goals={goals} onSaved={load} onDelete={() => remove(plan)} />
         ))}
@@ -181,14 +181,14 @@ function PlanRow({
         </form>
       ) : (
         <div className="flex flex-wrap items-center gap-3">
-          <span className="font-medium">{plan.title}</span>
-          <span className="text-sm tabular-nums text-slate-500">
+          <span className="text-base font-semibold">{plan.title}</span>
+          <span className="text-sm text-muted">
             {plan.startDate} ~ {plan.endDate}
           </span>
-          <span className="text-xs text-slate-500">{goal ? `${goal.year} · ${goal.title}` : "1년 목표 미연결"}</span>
+          <span className="text-sm text-muted">{goal ? `${goal.year} · ${goal.title}` : "1년 목표 미연결"}</span>
           <span className="ml-auto flex gap-2">
             <button
-              className="btn"
+              className="btn-text"
               onClick={() => {
                 setTitle(plan.title);
                 setGoalId(plan.yearlyGoalId ?? "");
@@ -198,7 +198,7 @@ function PlanRow({
             >
               수정
             </button>
-            <button className="btn" onClick={onDelete}>
+            <button className="btn-text" onClick={onDelete}>
               삭제
             </button>
           </span>
