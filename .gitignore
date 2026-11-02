@@ -50,6 +50,7 @@ next-env.d.ts
 
 .vercel
 .env*
+!.env.example
 
 # Claude/OMC 작업 상태 (로컬 전용)
 /.omc
